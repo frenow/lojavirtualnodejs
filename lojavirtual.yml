@@ -1,0 +1,327 @@
+swagger: '2.0'
+info:
+  description: This is a simple API
+  version: 1.0.0
+  title: Simple lojavirtual API
+  # put the contact info for your development or API team
+  contact:
+    email: you@your-company.com
+
+  license:
+    name: Apache 2.0
+    url: http://www.apache.org/licenses/LICENSE-2.0.html
+
+# tags are used for organizing operations
+tags:
+- name: admins
+  description: Secured Admin-only calls
+- name: developers
+  description: Operations available to regular developers
+
+paths:
+  /pedido:
+    get:
+      tags:
+      - developers
+      summary: searches pedido
+      operationId: searchPedido
+      description: |
+        By passing in the appropriate options, you can search for
+        available pedido in the system
+      produces:
+      - application/json
+      parameters:
+      - in: query
+        name: searchString
+        description: pass an optional search string for looking up pedido
+        required: false
+        type: string
+      - in: query
+        name: skip
+        description: number of records to skip for pagination
+        type: integer
+        format: int32
+        minimum: 0
+      - in: query
+        name: limit
+        description: maximum number of records to return
+        type: integer
+        format: int32
+        minimum: 0
+        maximum: 50
+      responses:
+        200:
+          description: search results matching criteria
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/pedidoItem'
+        400:
+          description: bad input parameter
+    post:
+      tags:
+      - admins
+      summary: adds an pedido item
+      operationId: addpedido
+      description: Adds an item to the system
+      consumes:
+      - application/json
+      produces:
+      - application/json
+      parameters:
+      - in: body
+        name: pedidoItem
+        description: pedido item to add
+        schema:
+          $ref: '#/definitions/pedidoItem'
+      responses:
+        201:
+          description: item created
+        400:
+          description: invalid input, object invalid
+        409:
+          description: an existing item already exists
+  /produto:
+    get:
+      tags:
+      - developers
+      summary: searches produto
+      operationId: searchproduto
+      description: |
+        By passing in the appropriate options, you can search for
+        available produto in the system
+      produces:
+      - application/json
+      parameters:
+      - in: query
+        name: searchString
+        description: pass an optional search string for looking up produto
+        required: false
+        type: string
+      - in: query
+        name: skip
+        description: number of records to skip for pagination
+        type: integer
+        format: int32
+        minimum: 0
+      - in: query
+        name: limit
+        description: maximum number of records to return
+        type: integer
+        format: int32
+        minimum: 0
+        maximum: 50
+      responses:
+        200:
+          description: search results matching criteria
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/produtoItem'
+        400:
+          description: bad input parameter
+    post:
+      tags:
+      - admins
+      summary: adds an produto item
+      operationId: addproduto
+      description: Adds an item to the system
+      consumes:
+      - application/json
+      produces:
+      - application/json
+      parameters:
+      - in: body
+        name: produtoItem
+        description: produto item to add
+        schema:
+          $ref: '#/definitions/produtoItem'
+      responses:
+        201:
+          description: item created
+        400:
+          description: invalid input, object invalid
+        409:
+          description: an existing item already exists
+  /pagamento:
+    get:
+      tags:
+      - developers
+      summary: searches pagamento
+      operationId: searchpagamento
+      description: |
+        By passing in the appropriate options, you can search for
+        available produto in the system
+      produces:
+      - application/json
+      parameters:
+      - in: query
+        name: searchString
+        description: pass an optional search string for looking up pagamento
+        required: false
+        type: string
+      - in: query
+        name: skip
+        description: number of records to skip for pagination
+        type: integer
+        format: int32
+        minimum: 0
+      - in: query
+        name: limit
+        description: maximum number of records to return
+        type: integer
+        format: int32
+        minimum: 0
+        maximum: 50
+      responses:
+        200:
+          description: search results matching criteria
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/pagamentoItem'
+        400:
+          description: bad input parameter
+    post:
+      tags:
+      - admins
+      summary: adds an pagamento item
+      operationId: addpagamento
+      description: Adds an item to the system
+      consumes:
+      - application/json
+      produces:
+      - application/json
+      parameters:
+      - in: body
+        name: pagamentoItem
+        description: pagamento item to add
+        schema:
+          $ref: '#/definitions/pagamentoItem'
+      responses:
+        201:
+          description: item created
+        400:
+          description: invalid input, object invalid
+        409:
+          description: an existing item already exists
+  /categoria:
+    get:
+      tags:
+      - developers
+      summary: searches categoria
+      operationId: searchcategoria
+      description: |
+        By passing in the appropriate options, you can search for
+        available categoria in the system
+      produces:
+      - application/json
+      parameters:
+      - in: query
+        name: searchString
+        description: pass an optional search string for looking up categoria
+        required: false
+        type: string
+      - in: query
+        name: skip
+        description: number of records to skip for pagination
+        type: integer
+        format: int32
+        minimum: 0
+      - in: query
+        name: limit
+        description: maximum number of records to return
+        type: integer
+        format: int32
+        minimum: 0
+        maximum: 50
+      responses:
+        200:
+          description: search results matching criteria
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/categoriaItem'
+        400:
+          description: bad input parameter
+    post:
+      tags:
+      - admins
+      summary: adds an categoria item
+      operationId: addcategoria
+      description: Adds an item to the system
+      consumes:
+      - application/json
+      produces:
+      - application/json
+      parameters:
+      - in: body
+        name: categoriaItem
+        description: categoria item to add
+        schema:
+          $ref: '#/definitions/categoriaItem'
+      responses:
+        201:
+          description: item created
+        400:
+          description: invalid input, object invalid
+        409:
+          description: an existing item already exists
+definitions:
+  pedidoItem:
+    type: object
+    required:
+    - id
+    - name
+    properties:
+      id:
+        type: string
+        format: uuid
+        example: d290f1ee-6c54-4b01-90e6-d701748f0851
+      name:
+        type: string
+        example: pedido 1234
+  produtoItem:
+    type: object
+    required:
+    - id
+    - name
+    properties:
+      id:
+        type: string
+        format: uuid
+        example: d290f1ee-6c54-4b01-90e6-d701748f0851
+      name:
+        type: string
+        example: Widget Adapter
+  pagamentoItem:
+    type: object
+    required:
+    - id
+    - name
+    properties:
+      id:
+        type: string
+        format: uuid
+        example: d290f1ee-6c54-4b01-90e6-d701748f0851
+      name:
+        type: string
+        example: dinheiro
+  categoriaItem:
+    type: object
+    required:
+    - id
+    - name
+    properties:
+      id:
+        type: string
+        format: uuid
+        example: d290f1ee-6c54-4b01-90e6-d701748f0851
+      name:
+        type: string
+        example: eletro eletronicos
+# Added by API Auto Mocking Plugin
+host: virtserver.swaggerhub.com
+basePath: /frenow/lojavirtual/1.0.0
+schemes:
+ - https
